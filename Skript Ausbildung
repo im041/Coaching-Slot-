@@ -13,9 +13,16 @@ hties <-as.matrix(help)
 help <- graph_from_data_frame(d=hties, vertices=nodes, directed=T)
 help
 
-# addiert edges auf, wenn sie auf der gleichen Beziehung sind
-h <- simplify(help, edge.attr.comb = list(weight="sum"))
-# ruft das finale igraph-Objekt auf.
-h
+#FARBEN nach Vertex-Attributen definieren
+colrs <- c("lightblue","pink")
+V(help)$color <- colrs[V(help)$Geschlecht]
+plot(help)
+
+V(help)$shape = "circle"
+#definiert, dass alle Knoten als Kreis auftreten
+kowi <- V(help)[Studienfach1 == "1"]
+# wöhlt alle Knoten aus, die das Vertex-Attribut "2" bei $smoke gesetzt haben
+V(help)[kowi]$shape = "square"
+
 # einfache Visualisierung
 plot(help)
